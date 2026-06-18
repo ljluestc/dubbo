@@ -26,12 +26,17 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * LeastActiveLoadBalance
- * <p>
- * Filter the number of invokers with the least number of active calls and count the weights and quantities of these invokers.
- * If there is only one invoker, use the invoker directly;
- * If there are multiple invokers and the weights are not the same, then random according to the total weight;
- * If there are multiple invokers and the same weight, then randomly called.
+ * Selects invokers with the fewest active (in-flight) calls.
+ *
+ * <p>The active value comes from {@link RpcStatus#getActive()} and represents unfinished requests at
+ * selection time, not total historical requests.
+ *
+ * <p>For example, if provider A and provider B each receive one request, but B returns earlier, the
+ * next selection may observe {@code A.active=1} and {@code B.active=0}. In that case B is preferred
+ * because it currently has fewer in-flight calls.
+ *
+ * <p>When multiple invokers share the same least-active value, this strategy falls back to weight-based
+ * random selection (or uniform random selection when weights are equal).
  */
 public class LeastActiveLoadBalance extends AbstractLoadBalance {
 

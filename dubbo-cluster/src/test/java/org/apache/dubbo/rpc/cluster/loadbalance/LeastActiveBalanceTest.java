@@ -17,6 +17,7 @@
 package org.apache.dubbo.rpc.cluster.loadbalance;
 
 import org.apache.dubbo.rpc.Invoker;
+import org.apache.dubbo.rpc.RpcStatus;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -64,5 +65,22 @@ class LeastActiveBalanceTest extends LoadBalanceBaseTest {
         // the sumInvoker1 : sumInvoker2 approximately equal to 1: 9
 
         Assertions.assertEquals(sumInvoker1 + sumInvoker2, loop, "select failed!");
+    }
+
+    @Test
+    void testSelectByCurrentInFlightRequests() {
+        LeastActiveLoadBalance lb = new LeastActiveLoadBalance();
+        String methodName = weightTestInvocation.getMethodName();
+
+        RpcStatus.beginCount(weightInvoker1.getUrl(), methodName);
+        try {
+            Assertions.assertEquals(1, weightTestRpcStatus1.getActive());
+            Assertions.assertEquals(0, weightTestRpcStatus2.getActive());
+
+            Invoker selected = lb.select(weightInvokers, null, weightTestInvocation);
+            Assertions.assertEquals("test2", selected.getUrl().getProtocol());
+        } finally {
+            RpcStatus.endCount(weightInvoker1.getUrl(), methodName, 1L, true);
+        }
     }
 }
