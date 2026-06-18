@@ -178,6 +178,16 @@ class AbstractReferenceConfigTest {
     }
 
     @Test
+    void testExchanger() {
+        ReferenceConfig referenceConfig = new ReferenceConfig();
+        referenceConfig.setExchanger("header");
+        Map<String, String> parameters = new HashMap<String, String>();
+        AbstractInterfaceConfig.appendParameters(parameters, referenceConfig);
+        assertThat(referenceConfig.getExchanger(), equalTo("header"));
+        assertThat(parameters, hasKey(Constants.EXCHANGER_KEY));
+    }
+
+    @Test
     void testSticky() {
         ReferenceConfig referenceConfig = new ReferenceConfig();
         referenceConfig.setSticky(true);

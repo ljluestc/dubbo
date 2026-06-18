@@ -54,6 +54,7 @@ public abstract class AbstractReferenceBuilder<
     protected Boolean lazy;
 
     protected String reconnect;
+    protected String exchanger;
 
     protected Boolean sticky;
 
@@ -112,6 +113,11 @@ public abstract class AbstractReferenceBuilder<
         return getThis();
     }
 
+    public B exchanger(String exchanger) {
+        this.exchanger = exchanger;
+        return getThis();
+    }
+
     public B sticky(Boolean sticky) {
         this.sticky = sticky;
         return getThis();
@@ -148,6 +154,9 @@ public abstract class AbstractReferenceBuilder<
         }
         if (!StringUtils.isEmpty(reconnect)) {
             instance.setReconnect(reconnect);
+        }
+        if (!StringUtils.isEmpty(exchanger)) {
+            instance.setExchanger(exchanger);
         }
         if (sticky != null) {
             instance.setSticky(sticky);

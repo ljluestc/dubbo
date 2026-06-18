@@ -57,6 +57,7 @@ public interface ReferenceAttributes {
     String URL = "url";
 
     String CLIENT = "client";
+    String EXCHANGER = "exchanger";
 
     //    /**
     //     * When enable, prefer to call local service in the same JVM if it's present, default value is true

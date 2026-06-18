@@ -107,6 +107,11 @@ public class ReferenceBeanBuilder {
         return this;
     }
 
+    public ReferenceBeanBuilder setExchanger(String exchanger) {
+        attributes.put(ReferenceAttributes.EXCHANGER, exchanger);
+        return this;
+    }
+
     public ReferenceBeanBuilder setUrl(String url) {
         attributes.put(ReferenceAttributes.URL, url);
         return this;

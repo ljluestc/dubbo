@@ -14,6 +14,8 @@
 
 public java.lang.String com.alibaba.dubbo.config.ReferenceConfig.getClient()
 public void com.alibaba.dubbo.config.ReferenceConfig.setClient(java.lang.String)
+public java.lang.String com.alibaba.dubbo.config.ReferenceConfig.getExchanger()
+public void com.alibaba.dubbo.config.ReferenceConfig.setExchanger(java.lang.String)
 public void com.alibaba.dubbo.config.ReferenceConfig.setProtocol(java.lang.String)
 public java.lang.Class com.alibaba.dubbo.config.ReferenceConfig.getInterfaceClass()
 public void com.alibaba.dubbo.config.ReferenceConfig.setInterfaceClass(java.lang.Class)

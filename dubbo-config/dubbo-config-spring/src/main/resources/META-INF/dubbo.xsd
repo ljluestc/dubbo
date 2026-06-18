@@ -1467,6 +1467,11 @@
                         <xsd:documentation><![CDATA[ Transporter layer framework: netty mina.... ]]></xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
+                <xsd:attribute name="exchanger" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[ The method of information exchange. ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
                 <xsd:attribute name="threadpool" type="xsd:string">
                     <xsd:annotation>
                         <xsd:documentation>
@@ -1546,6 +1551,11 @@
                 <xsd:attribute name="client" type="xsd:string">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[ Protocol transport client type. ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="exchanger" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[ The method of information exchange. ]]></xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
                 <xsd:attribute name="consumer" type="xsd:string">

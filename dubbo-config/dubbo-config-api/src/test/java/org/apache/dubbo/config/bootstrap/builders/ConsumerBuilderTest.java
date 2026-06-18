@@ -38,6 +38,13 @@ class ConsumerBuilderTest {
     }
 
     @Test
+    void exchanger() {
+        ConsumerBuilder builder = ConsumerBuilder.newBuilder();
+        builder.exchanger("header");
+        Assertions.assertEquals("header", builder.build().getExchanger());
+    }
+
+    @Test
     void threadPool() {
         ConsumerBuilder builder = ConsumerBuilder.newBuilder();
         builder.threadPool("threadPool");
@@ -77,6 +84,7 @@ class ConsumerBuilderTest {
         ConsumerBuilder builder = ConsumerBuilder.newBuilder();
         builder.isDefault(true)
                 .client("client")
+                .exchanger("header")
                 .threadPool("threadPool")
                 .coreThreads(10)
                 .threads(100)
@@ -89,6 +97,7 @@ class ConsumerBuilderTest {
 
         Assertions.assertTrue(config.isDefault());
         Assertions.assertEquals("client", config.getClient());
+        Assertions.assertEquals("header", config.getExchanger());
         Assertions.assertEquals("threadPool", config.getThreadpool());
         Assertions.assertEquals("id", config.getId());
         Assertions.assertEquals(10, config.getCorethreads());

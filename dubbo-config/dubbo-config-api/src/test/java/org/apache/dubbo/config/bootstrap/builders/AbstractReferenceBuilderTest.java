@@ -85,6 +85,13 @@ class AbstractReferenceBuilderTest {
     }
 
     @Test
+    void exchanger() {
+        ReferenceBuilder builder = new ReferenceBuilder();
+        builder.exchanger("header");
+        Assertions.assertEquals("header", builder.build().getExchanger());
+    }
+
+    @Test
     void sticky() {
         ReferenceBuilder builder = new ReferenceBuilder();
         builder.sticky(true);
@@ -116,6 +123,7 @@ class AbstractReferenceBuilderTest {
                 .injvm(false)
                 .lazy(true)
                 .reconnect("reconnect")
+                .exchanger("header")
                 .sticky(false)
                 .version("version")
                 .group("group")
@@ -132,6 +140,7 @@ class AbstractReferenceBuilderTest {
         Assertions.assertTrue(config.getLazy());
         Assertions.assertFalse(config.getSticky());
         Assertions.assertEquals("reconnect", config.getReconnect());
+        Assertions.assertEquals("header", config.getExchanger());
         Assertions.assertEquals("version", config.getVersion());
         Assertions.assertEquals("group", config.getGroup());
 
